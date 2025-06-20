@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagrama de Red Interactivo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Mi Diagrama de Red</h1>
+        <div class="user-info-section"> <div class="user-input">
+                <label for="userName">Tu Nombre:</label>
+                <input type="text" id="userName" placeholder="Ingresa tu nombre">
+            </div>
+            <button id="submitAllBtn">Enviar Todo</button> </div>
+
+        <div class="instructions">
+            <h2>Instrucciones de Red:</h2>
+            <p>Debe configurar tres enlaces con la cantidad de hosts posibles especificada:</p>
+            <ul>
+                <li>Enlace 1 - proveedor a ISP (IP Pública): <span id="hostsLink1">N</span> hosts posibles.</li>
+                <li>Enlace 2 - ISP a Hogar (IP Privada): <span id="hostsLink2">N</span> hosts posibles.</li>
+                <li>Enlace 3 - Hogar a Compu. (IP Privada): <span id="hostsLink3">N</span> hosts posibles.</li>
+            </ul>
+            <p>Calcule la máscara de red y el prefijo (CIDR) adecuados para cada enlace según la cantidad de hosts.</p>
+        </div>
+    </header>
+
+    <main class="network-diagram">
+        <div class="node router-proveedor" id="routerProveedor">
+            <img src="icons/router_proveedor.png" alt="Router Proveedor">
+            <span>Router Proveedor</span>
+        </div>
+        <div class="node router-isp" id="routerIsp">
+            <img src="icons/router_isp.png" alt="Router ISP">
+            <span>Router ISP</span>
+        </div>
+        <div class="node router-hogar" id="routerHogar">
+            <img src="icons/router_hogar.png" alt="Router Hogar">
+            <span>Router Hogar</span>
+        </div>
+        <div class="node computador" id="computador">
+            <img src="icons/computer.png" alt="Computador">
+            <span>Computador</span>
+        </div>
+    </main>
+
+    <div id="configModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeModalBtn">&times;</span>
+            <h2>Configuración de <span id="modalNodeName"></span></h2>
+
+            <div class="config-section">
+                <h3>Configurador Cliente</h3>
+                <label for="clientAddress">Address (Host):</label>
+                <input type="text" id="clientAddress">
+
+                <label>Netmask / Prefijo:</label>
+                <div class="netmask-group">
+                    <input type="text" id="clientNetmask" class="netmask-input">
+                    <span class="equal-sign">=</span>
+                    <input type="text" id="clientPrefix" class="prefix-input" placeholder="/24">
+                </div>
+
+                <label for="clientGateway">Gateway:</label>
+                <input type="text" id="clientGateway">
+                <label for="clientDns">DNS:</label>
+                <input type="text" id="clientDns">
+            </div>
+
+            <div class="config-section">
+                <h3>Configurador Servidor</h3>
+                <label for="serverNetwork">Network:</label>
+                <input type="text" id="serverNetwork">
+                <label for="serverAddress">Address:</label>
+                <input type="text" id="serverAddress">
+
+                <label>Netmask / Prefijo:</label>
+                <div class="netmask-group">
+                    <input type="text" id="serverNetmask" class="netmask-input">
+                    <span class="equal-sign">=</span>
+                    <input type="text" id="serverPrefix" class="prefix-input" placeholder="/24">
+                </div>
+            </div>
+
+            <button id="saveConfigBtn">Guardar Configuración</button>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

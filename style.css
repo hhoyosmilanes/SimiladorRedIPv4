@@ -1,0 +1,436 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+header {
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.user-input {
+    margin-top: 10px;
+}
+
+.user-input label {
+    margin-right: 10px;
+}
+
+.user-input input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* ... (todo el CSS anterior hasta antes de .network-diagram) ... */
+
+.user-info-section {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centrar el nombre y el botón */
+    gap: 20px; /* Espacio entre el input de usuario y el botón */
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.user-input {
+    margin-top: 0; /* Anular el margin-top anterior si es necesario */
+    display: flex; /* Para alinear label e input */
+    align-items: center;
+    gap: 10px;
+}
+
+#submitAllBtn {
+    background-color: #007bff; /* Un color azul para el botón de envío */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s;
+}
+
+#submitAllBtn:hover {
+    background-color: #0056b3;
+}
+
+.instructions {
+    background-color: #e6f7ff;
+    border: 1px solid #91d5ff;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 1200px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.instructions h2 {
+    margin-top: 0;
+    color: #0056b3;
+    font-size: 1.3em;
+    border-bottom: 1px solid #b3e0ff;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.instructions p {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.instructions ul {
+    list-style-type: none; /* Quitar viñetas por defecto */
+    padding: 0;
+    margin-top: 10px;
+}
+
+.instructions ul li {
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.instructions ul li span {
+    font-weight: bold;
+    color: #d9534f; /* Color para resaltar los N hosts */
+}
+
+
+/* ... (todo el CSS para .network-diagram y .node, etc., se mantiene igual, ya está ajustado) ... */
+
+
+/* --- RESPONSIVIDAD (Vertical para Móviles) --- */
+@media (max-width: 768px) {
+    /* ... (CSS anterior para móviles) ... */
+
+    .user-info-section {
+        flex-direction: column; /* Apilar el nombre y el botón en móviles */
+        gap: 15px;
+    }
+
+    .user-input {
+        flex-direction: column; /* Apilar label e input en móviles */
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .user-input input {
+        width: 100%; /* El input de nombre ocupará todo el ancho en móvil */
+        max-width: 250px; /* Limitar un poco el ancho */
+    }
+
+    .instructions {
+        padding: 10px 15px;
+    }
+}
+
+.network-diagram {
+    /* display: flex; REMOVIDO: Se usará grid */
+    flex-direction: row; /* Predeterminado para PC */
+    align-items: center;
+    justify-content: center;
+    gap: 50px; /* Espacio entre los nodos principales */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan si no hay suficiente espacio */
+    position: relative;
+    padding: 20px;
+    border: 1px dashed #ccc;
+    background-color: #fff;
+    border-radius: 8px;
+    max-width: 1200px;
+    width: 100%;
+    min-height: 400px;
+
+    /* --- LAYOUT PARA PC (HORIZONTAL) - AJUSTADO --- */
+    display: grid; /* Ahora usamos Grid */
+    grid-template-columns: repeat(4, 1fr); /* Ajustado de 5 a 4 columnas */
+    grid-template-rows: 1fr; /* Una sola fila para todos los elementos */
+    gap: 20px; /* Espacio entre items de la grilla */
+    justify-items: center;
+    align-items: center;
+}
+
+.node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #e9eff5;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+}
+
+.node:hover {
+    transform: translateY(-5px);
+    box-shadow: 4px 4px 10px rgba(0,0,0,0.2);
+}
+
+.node img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 5px;
+}
+
+.node span {
+    font-size: 0.9em;
+    color: #333;
+}
+
+
+/* Posicionamiento de los nodos en la cuadrícula */
+.router-proveedor { grid-area: 1 / 1 / 2 / 2; }
+.router-isp         { grid-area: 1 / 2 / 2 / 3; }
+.router-hogar       { grid-area: 1 / 3 / 2 / 4; }
+.computador         { grid-area: 1 / 4 / 2 / 5; } /* Ahora en la misma fila que los otros routers */
+
+/* --- LÍNEAS VISUALES (usando pseudo-elementos o bordes) - AJUSTADO --- */
+/* Estas líneas son una aproximación y es muy recomendable usar SVG para mayor precisión */
+
+.router-proveedor::after,
+.router-isp::after,
+.router-hogar::after { /* Ahora el router-hogar también tendrá una línea directa a la derecha */
+    content: '';
+    position: absolute;
+    right: -25px; /* Ajusta según el gap de la grilla */
+    width: 20px;
+    height: 2px;
+    background-color: #666;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* El computador no necesita una línea saliendo de él si es el último de la cadena */
+.computador::after {
+    content: none; /* Asegura que el computador no tenga una línea saliendo */
+}
+
+/* REMOVIDAS: Reglas específicas para .router-hogar::after, .router-hogar::before que gestionaban bifurcaciones a subredes */
+/* Las reglas de bifurcación complejas ya no son necesarias */
+/*
+.router-hogar::after { width: 0; }
+.router-hogar::before { display: none; }
+.router-hogar::before { display: none; }
+*/
+
+
+/* --- MODAL (Ventana Emergente) - SIN CAMBIOS SIGNIFICATIVOS AQUÍ --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.config-section {
+    margin-bottom: 25px;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.config-section h3 {
+    margin-top: 0;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.config-section label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+    font-weight: bold;
+}
+
+/* Estilos para el grupo Netmask/Prefijo - SE MANTIENEN IGUAL */
+.netmask-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    width: calc(100% - 20px);
+}
+
+.netmask-group input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    margin-bottom: 0; /* Anula el margin-bottom de la regla general de inputs */
+}
+
+.netmask-group .netmask-input {
+    max-width: 65%;
+}
+
+.netmask-group .prefix-input {
+    max-width: 35%;
+    text-align: center;
+}
+
+.netmask-group .equal-sign {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Ajustes para inputs generales (que no sean parte de .netmask-group) */
+.config-section input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+
+#saveConfigBtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    float: right;
+    margin-top: 10px;
+}
+
+#saveConfigBtn:hover {
+    background-color: #45a049;
+}
+
+
+/* --- RESPONSIVIDAD (Vertical para Móviles) - AJUSTADO --- */
+@media (max-width: 768px) {
+    .network-diagram {
+        flex-direction: column;
+        gap: 30px;
+        padding: 15px;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+
+    /* Solo listamos los nodos que existen ahora */
+    .router-proveedor, .router-isp, .router-hogar, .computador {
+        grid-area: auto;
+        margin-bottom: 20px;
+    }
+
+    /* Ajustar las líneas para el layout vertical si se usaran pseudo-elementos */
+    /* Todos los nodos que tienen un "siguiente" en la cadena visual */
+    .router-proveedor::after,
+    .router-isp::after,
+    .router-hogar::after { /* El router hogar ahora apunta directamente hacia abajo */
+        content: '';
+        position: absolute;
+        bottom: -25px; /* Ajusta para que apunten hacia abajo */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 2px; /* Ahora vertical */
+        height: 20px; /* Ahora vertical */
+        background-color: #666;
+        top: auto; /* Resetea top */
+        right: auto; /* Resetea right */
+    }
+
+    /* El computador sigue sin línea saliendo */
+    .computador::after {
+        content: none;
+    }
+
+    /* Eliminamos el margin-bottom grande que era para las bifurcaciones a subredes */
+    .router-hogar {
+        margin-bottom: 20px; /* Vuelve a un margen normal como los otros nodos */
+    }
+
+    .modal-content {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .config-section input[type="text"] {
+        width: calc(100% - 16px);
+    }
+
+    .netmask-group {
+        flex-direction: row;
+        width: calc(100% - 16px);
+    }
+}
+
+/* Estilos para mostrar la configuración de IP en el DOM del nodo - SE MANTIENEN IGUAL */
+.node-config-display {
+    margin-top: 10px;
+    padding-top: 5px;
+    border-top: 1px dashed #ccc;
+    font-size: 0.8em;
+    color: #0056b3;
+    text-align: center;
+    width: 100%;
+}
+
+.node-config-display p {
+    margin: 3px 0;
+    word-break: break-all;
+}
