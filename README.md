@@ -20,3 +20,4 @@ Este es un simulador web interactivo diseñado para ayudar a los estudiantes a p
 ---
 
 **Desarrollado con:** HTML, CSS, JavaScript (jQuery) y Google Apps Script.
+**Para uso pripio descargar y cambiar link de su propio Google Apps Script.
