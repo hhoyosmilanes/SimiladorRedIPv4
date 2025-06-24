@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revisor de Configuración de Red</title>
+    <link rel="stylesheet" href="reviewer_style.css">
+</head>
+<body>
+    <header>
+        <h1>Revisor de Configuraciones de Red IPv4</h1>
+        <p>Pega la cadena de configuración del estudiante en el cuadro de texto y haz clic en "Revisar".</p>
+    </header>
+
+    <main class="reviewer-container">
+        <div class="input-section">
+            <label for="configInput">Cadena de Configuración del Estudiante:</label>
+            <textarea id="configInput" placeholder="Pega la cadena de configuración aquí, por ejemplo: ReqL1:6/29,ReqL2:126/25,ReqL3:62/26|routerProveedor:C-IP:0/0,C-NM:0,C-GW:0,C-DNS:0;S-NW:191.108.146.80,S-IP:191.108.146.81/29,S-NM:255.255.255.248|..." rows="10"></textarea>
+            <button id="reviewBtn">Revisar Configuración</button>
+        </div>
+
+        <div class="output-section">
+            <h2>Resultados de la Revisión:</h2>
+            <div id="resultsOutput" class="results-box">
+                <!-- Aquí se mostrarán los resultados de la revisión -->
+                <p>No hay resultados aún. Pega una cadena y haz clic en "Revisar".</p>
+            </div>
+            <h3>Detalles Parseados:</h3>
+            <pre id="parsedDataOutput" class="parsed-data-box"></pre>
+        </div>
+    </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="reviewer_script.js"></script>
+</body>
+</html>
