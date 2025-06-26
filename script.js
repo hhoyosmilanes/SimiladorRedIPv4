@@ -34,7 +34,7 @@ $(document).ready(function() {
     const linkHostRequirements = {};
 
     // ¡IMPORTANTE! Reemplaza esta URL con la URL de TU aplicación web de Google Apps Script
-    const GOOGLE_APPS_SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyU0-7NFOsc_bzAW4P_pnKpIhHv5SIB1W5lzAad-mw4HAhNY6KI6kb8wRVA-F8LQXgQfQ/exec";
+    const GOOGLE_APPS_SCRIPT_WEB_APP_URL = "mi url apps scrip";
 
 
     function generateRandomHosts() {
